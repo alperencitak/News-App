@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
 }
 
@@ -67,9 +67,9 @@ dependencies {
     implementation (libs.androidx.navigation.compose)
 
     //Dagger Hilt
-    implementation (libs.dagger.hilt.android)
-    kapt (libs.hilt.compiler)
-    implementation (libs.androidx.hilt.navigation.compose)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
 
     //Retrofit
@@ -93,8 +93,8 @@ dependencies {
     implementation (libs.androidx.paging.compose)
 
     //Room
-    implementation (libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
+//    implementation (libs.androidx.room.runtime)
+//    kapt(libs.androidx.room.compiler)
+//    implementation(libs.androidx.room.ktx)
 
 }

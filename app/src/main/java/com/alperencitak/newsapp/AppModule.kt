@@ -1,4 +1,4 @@
-package com.alperencitak.newsapp.di
+package com.alperencitak.newsapp
 
 import android.app.Application
 import com.alperencitak.newsapp.data.manger.LocalUserMangerImpl
@@ -24,7 +24,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocalUserManger(
+    fun provideAppEntries(
         localUserManger: LocalUserManger
     ) = AppEntryUseCases(
         readAppEntry = ReadAppEntry(localUserManger),
