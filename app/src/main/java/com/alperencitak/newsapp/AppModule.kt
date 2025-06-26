@@ -3,9 +3,9 @@ package com.alperencitak.newsapp
 import android.app.Application
 import com.alperencitak.newsapp.data.manger.LocalUserMangerImpl
 import com.alperencitak.newsapp.domain.manger.LocalUserManger
-import com.alperencitak.newsapp.domain.usecases.AppEntryUseCases
-import com.alperencitak.newsapp.domain.usecases.ReadAppEntry
-import com.alperencitak.newsapp.domain.usecases.SaveAppEntry
+import com.alperencitak.newsapp.domain.usecases.app_entry.AppEntryUseCases
+import com.alperencitak.newsapp.domain.usecases.app_entry.ReadAppEntry
+import com.alperencitak.newsapp.domain.usecases.app_entry.SaveAppEntry
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

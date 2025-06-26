@@ -1,4 +1,4 @@
-package com.alperencitak.newsapp.domain.usecases
+package com.alperencitak.newsapp.domain.usecases.app_entry
 
 import com.alperencitak.newsapp.domain.manger.LocalUserManger
 import kotlinx.coroutines.flow.Flow
