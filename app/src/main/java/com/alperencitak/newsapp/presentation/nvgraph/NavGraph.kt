@@ -1,5 +1,7 @@
 package com.alperencitak.newsapp.presentation.nvgraph
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +19,8 @@ import com.alperencitak.newsapp.presentation.home.HomeScreen
 import com.alperencitak.newsapp.presentation.home.HomeViewModel
 import com.alperencitak.newsapp.presentation.onboarding.OnBoardingScreen
 import com.alperencitak.newsapp.presentation.onboarding.OnBoardingViewModel
+import com.alperencitak.newsapp.presentation.search.SearchScreen
+import com.alperencitak.newsapp.presentation.search.SearchViewModel
 
 @Composable
 fun NavGraph(
@@ -32,7 +36,7 @@ fun NavGraph(
         navigation(
             route = Route.AppStartNavigation.route,
             startDestination = Route.OnBoardingScreen.route
-        ){
+        ) {
             composable(
                 route = Route.OnBoardingScreen.route
             ) {
@@ -55,13 +59,28 @@ fun NavGraph(
         navigation(
             route = Route.NewsNavigation.route,
             startDestination = Route.NewsNavigatorScreen.route
-        ){
+        ) {
             composable(
                 route = Route.NewsNavigatorScreen.route
             ) {
                 val viewModel: HomeViewModel = hiltViewModel()
                 val articles = viewModel.news.collectAsLazyPagingItems()
-                HomeScreen(articles = articles, navigate = {})
+                HomeScreen(
+                    articles = articles,
+                    navigate = { route ->
+                        navController.navigate(route)
+                    }
+                )
+            }
+            composable(
+                route = Route.SearchScreen.route
+            ) {
+                val viewModel: SearchViewModel = hiltViewModel()
+                SearchScreen(
+                    event = viewModel::onEvent,
+                    state = viewModel.state.value,
+                    navigate = {}
+                )
             }
         }
     }

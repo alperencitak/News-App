@@ -66,24 +66,24 @@ fun SearchBar(
                     painter = painterResource(R.drawable.search),
                     contentDescription = null,
                     modifier = Modifier.size(IconSize),
-                    tint = colorResource(R.color.body)
+                    tint = if (isSystemInDarkTheme()) colorResource(R.color.display_small) else colorResource(R.color.body)
                 )
             },
             placeholder = {
                 Text(
                     text = text,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(R.color.placeholder)
                 )
             },
             shape = MaterialTheme.shapes.medium,
             colors = TextFieldDefaults.colors(
-                disabledContainerColor = colorResource(R.color.input_background),
-                focusedContainerColor = colorResource(R.color.input_background),
-                unfocusedContainerColor = colorResource(R.color.input_background),
-                focusedTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
-                unfocusedTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
-                cursorColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                disabledContainerColor = if (isSystemInDarkTheme()) colorResource(R.color.body) else colorResource(R.color.input_background),
+                focusedContainerColor = if (isSystemInDarkTheme()) colorResource(R.color.body) else colorResource(R.color.input_background),
+                unfocusedContainerColor = if (isSystemInDarkTheme()) colorResource(R.color.body) else colorResource(R.color.input_background),
+                focusedTextColor = Color.Black,
+                unfocusedTextColor = Color.Black,
+                cursorColor = Color.Black,
                 disabledIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
@@ -96,7 +96,7 @@ fun SearchBar(
                     onSearch()
                 }
             ),
-            textStyle = MaterialTheme.typography.bodySmall,
+            textStyle = MaterialTheme.typography.bodyMedium,
             interactionSource = interactionSource
         )
     }
