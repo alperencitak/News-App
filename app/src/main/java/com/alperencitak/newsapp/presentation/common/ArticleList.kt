@@ -18,13 +18,30 @@ import com.alperencitak.newsapp.presentation.Dimens.MediumPadding1
 @Composable
 fun ArticleList(
     modifier: Modifier = Modifier,
+    articles: List<Article>,
+    onClick: (Article) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+        contentPadding = PaddingValues(all = ExtraSmallPadding2)
+    ) {
+        items(articles){ article ->
+            ArticleCard(article = article, onClick = { onClick(article) })
+        }
+    }
+}
+
+@Composable
+fun ArticleList(
+    modifier: Modifier = Modifier,
     articles: LazyPagingItems<Article>,
     onClick: (Article) -> Unit
 ) {
     val handlePagingResult = handlePagingResult(articles)
     if (handlePagingResult){
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(MediumPadding1),
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ) {
