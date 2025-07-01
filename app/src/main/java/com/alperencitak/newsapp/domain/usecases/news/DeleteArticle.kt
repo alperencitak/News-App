@@ -1,14 +1,14 @@
 package com.alperencitak.newsapp.domain.usecases.news
 
-import com.alperencitak.newsapp.data.local.NewsDao
 import com.alperencitak.newsapp.domain.model.Article
+import com.alperencitak.newsapp.domain.repository.NewsRepository
 
 class DeleteArticle(
-    private val newsDao: NewsDao
+    private val newsRepository: NewsRepository
 ) {
 
     suspend operator fun invoke(article: Article){
-        newsDao.delete(article)
+        newsRepository.deleteArticle(article)
     }
 
 }
