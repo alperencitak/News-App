@@ -45,6 +45,12 @@ fun DetailsTopBar(
             }
         },
         actions = {
+            IconButton(onClick = onBookmarkClick) {
+                Icon(
+                    painter = painterResource(R.drawable.unselected_bookmark),
+                    contentDescription = null
+                )
+            }
             IconButton(onClick = onShareClick) {
                 Icon(
                     painter = painterResource(R.drawable.share),

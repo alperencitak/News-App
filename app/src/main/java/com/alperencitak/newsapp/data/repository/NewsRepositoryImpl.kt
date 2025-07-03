@@ -9,8 +9,10 @@ import com.alperencitak.newsapp.data.remote.NewsPagingSource
 import com.alperencitak.newsapp.data.remote.SearchNewsPagingSource
 import com.alperencitak.newsapp.domain.model.Article
 import com.alperencitak.newsapp.domain.repository.NewsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withContext
 
 class NewsRepositoryImpl(
     private val newsApi: NewsApi,
@@ -55,7 +57,9 @@ class NewsRepositoryImpl(
     }
 
     override suspend fun selectArticle(url: String): Article? {
-        return newsDao.getArticle(url)
+        return withContext(Dispatchers.IO){
+            newsDao.getArticle(url)
+        }
     }
 
 }

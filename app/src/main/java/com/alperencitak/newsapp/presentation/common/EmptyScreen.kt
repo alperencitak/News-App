@@ -33,7 +33,7 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun EmptyScreen(error: LoadState.Error? = null) {
+fun EmptyScreen(error: LoadState.Error? = null, isEmpty: Boolean = false) {
 
     var message by remember { mutableStateOf(parseErrorMessage(error = error)) }
 
@@ -48,11 +48,16 @@ fun EmptyScreen(error: LoadState.Error? = null) {
 
     val alphaAnimation by animateFloatAsState(
         targetValue = if (startAnimation) 0.3f else 0f,
-        animationSpec = tween(durationMillis = 1000)
+        animationSpec = tween(durationMillis = 1000),
+        label = ""
     )
 
     LaunchedEffect(key1 = true) {
         startAnimation = true
+    }
+
+    if (isEmpty){
+        message = "No news found."
     }
 
     EmptyContent(alphaAnim = alphaAnimation, message = message, iconId = icon)
