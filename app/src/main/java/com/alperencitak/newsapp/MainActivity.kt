@@ -27,31 +27,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<MainViewModel>()
-    @Inject
-    lateinit var newsDao: NewsDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        lifecycleScope.launch {
-            newsDao.upsert(
-                article = Article(
-                    author = "Joel Khalili",
-                    content = "Mining firms are also facing heightened competition for limited energy resources in the US, mostly from AI companies flush with venture funding. New projections from the US Department of Energy indic… [+3401 chars]",
-                    description = "Donald Trump pledged to cement the US as the bitcoin mining capital of the planet. The president’s sweeping tariffs stand to simultaneously undermine and advance that ambition in one swoop.",
-                    publishedAt = "2025-06-20T09:30:00Z",
-                    source = Source(
-                        id = "wired",
-                        name = "Wired"
-                    ),
-                    title = "A False Start on the Road to an All-American Bitcoin",
-                    url = "https://www.wired.com/story/a-false-start-on-the-road-to-an-all-american-bitcoin/",
-                    urlToImage = "https://media.wired.com/photos/68531ba03ca23a58119ac365/191:100/w_1280,c_limit/061825-amercian-bitcoin-false-start.jpg"
-                )
-            )
-        }
-
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel.splashCondition

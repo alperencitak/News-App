@@ -21,7 +21,7 @@ fun ArticleList(
     articles: List<Article>,
     onClick: (Article) -> Unit
 ) {
-    if(articles.isEmpty()){
+    if (articles.isEmpty()) {
         EmptyScreen()
     }
 
@@ -30,7 +30,7 @@ fun ArticleList(
         verticalArrangement = Arrangement.spacedBy(MediumPadding1),
         contentPadding = PaddingValues(all = ExtraSmallPadding2)
     ) {
-        items(articles){ article ->
+        items(articles) { article ->
             ArticleCard(article = article, onClick = { onClick(article) })
         }
     }
@@ -43,13 +43,13 @@ fun ArticleList(
     onClick: (Article) -> Unit
 ) {
     val handlePagingResult = handlePagingResult(articles)
-    if (handlePagingResult){
+    if (handlePagingResult) {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(MediumPadding1),
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ) {
-            items(count = articles.itemCount){
+            items(count = articles.itemCount) {
                 articles[it]?.let {
                     ArticleCard(article = it, onClick = { onClick(it) })
                 }
@@ -61,31 +61,34 @@ fun ArticleList(
 @Composable
 fun handlePagingResult(
     articles: LazyPagingItems<Article>
-): Boolean{
+): Boolean {
 
     val loadState = articles.loadState
-    val error = when{
+    val error = when {
         loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
         loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
         loadState.append is LoadState.Error -> loadState.append as LoadState.Error
         else -> null
     }
 
-    return when{
+    return when {
         loadState.refresh is LoadState.Loading -> {
             ShimmerEffect()
             false
         }
+
         error != null -> {
             EmptyScreen(
                 error = error
             )
             false
         }
+
         articles.itemCount == 0 -> {
             EmptyScreen(isEmpty = true)
             false
         }
+
         else -> {
             true
         }
@@ -94,7 +97,7 @@ fun handlePagingResult(
 }
 
 @Composable
-fun ShimmerEffect(){
+fun ShimmerEffect() {
     Column(
         verticalArrangement = Arrangement.spacedBy(MediumPadding1)
     ) {
